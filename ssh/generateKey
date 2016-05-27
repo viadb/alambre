@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CUSTOMER=$1 
+BITS=2064 # Weird, huh? 2048 is sufficient per man page http://linux.die.net/man/1/ssh-keygen
+LOCATION=keys/
+PUBKEY=id_rsa_${CUSTOMER}.pub
+KEY=id_rsa_${CUSTOMER}
+MAIL="ecalvo@company"
+
+[[ -d $LOCATION ]] || mkdir $LOCATION
+
+ssh-keygen -C ${CUSTOMER}_${MAIL} -f $KEY -t rsa -b $BITS || exit 2
+
+cat $PUBKEY || exit 1
+
+exit 0
