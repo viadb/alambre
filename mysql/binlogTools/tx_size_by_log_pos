@@ -1,4 +1,6 @@
 #!/bin/bash
+## STILL IN DEV, NOT WORKING
+
 
 ## Examining transaction sizes using binlog positions
 
@@ -12,4 +14,6 @@ end_log_pos 25943649
 # at 25943841
 end_log_pos 25944192
 
-end_log_pos - at = size of the written tx in binlog
+# TODO end_log_pos - at = size of the written tx in binlog
+
+# Get: the maximum size, the average size and the medium size, and 95%, stdev
