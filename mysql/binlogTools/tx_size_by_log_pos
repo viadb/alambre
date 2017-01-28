@@ -1,0 +1,15 @@
+#!/bin/bash
+
+## Examining transaction sizes using binlog positions
+
+grep -Po "(^# at |end_log_pos )[[:digit:]]+" $1
+ 
+# TODO:
+
+#output:
+# at 25943296
+end_log_pos 25943649
+# at 25943841
+end_log_pos 25944192
+
+end_log_pos - at = size of the written tx in binlog
