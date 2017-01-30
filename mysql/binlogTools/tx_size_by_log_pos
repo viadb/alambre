@@ -1,5 +1,6 @@
 #!/bin/bash
-# funciona con cualquier output de mysqlbinlog (vebose o no)
+# Tested, necesita mucho más amor porque no es tan simple medir la 
+# tx basandonos en las entradas at y linea siguiente
 
 
 ## Examining transaction sizes using binlog positions
