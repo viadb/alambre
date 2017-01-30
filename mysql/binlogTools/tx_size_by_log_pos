@@ -4,7 +4,7 @@
 
 ## Examining transaction sizes using binlog positions
 # Are you a onliner? Welcome to the club:
-grep -Po "(^# at |end_log_pos )[[:digit:]]+" $1 | awk 'BEGIN{ maxTx=0; maxAt=0 }NR%2{a=$0;init=$3;next}{sizeNow=$2-init; if(sizeNow > maxTx){maxTx=sizeNow; maxAt=init};print a" "$0" Size:"sizeNow;} END {printf "MaxTxSize="maxTx" maxAt="maxAt" "}'
+grep -Po "(^# at |end_log_pos )[[:digit:]]+" $1 | awk 'BEGIN{ maxTx=0; maxAt=0 }NR%2{a=$0;init=$3;next}{sizeNow=$2-init; if(sizeNow > maxTx){maxTx=sizeNow; maxAt=init};print a" "$0" Size:"sizeNow;} END {printf "MaxTxSize="maxTx" maxAt="maxAt" \n"}'
  
 # TODO:
 # Get: the maximum size, the average size and the medium size, and 95%, stdev
