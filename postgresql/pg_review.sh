@@ -12,6 +12,11 @@
 # - Get some OS details, blockread info, etc. The idea is to avoid the use of any
 #   privileges on the system.
 
+# Example:
+# curl https://raw.githubusercontent.com/ayresdata/alambre/master/postgresql/pg_review.sh > review.sh ; chmod +x review.sh ; mkdir /tmp/review; ./review.sh -o /tmp/review/ -b /usr/bin
+#
+
+
 VERSION="1.4b"
 
 # You should not change variables here, please use the parameters.
