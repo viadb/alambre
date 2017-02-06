@@ -9,3 +9,10 @@ grep -Po "(^# at |end_log_pos )[[:digit:]]+" $1 | awk 'BEGIN{ maxTx=0; maxAt=0 }
  
 # TODO:
 # Get: the maximum size, the average size and the medium size, and 95%, stdev
+
+# BEGIN /COMMIT track
+# at ...
+#  #170203 17:27:22 server id 73  end_log_pos 1093568608   Delete_rows: table id 125358 flags: STMT_END_F
+# at <end_log_pos>
+# COMMIT
+
