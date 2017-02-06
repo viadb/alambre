@@ -1,4 +1,8 @@
 #!/bin/bash
+#
+# [WIP]
+#
+
 # Tested, necesita mucho más amor porque no es tan simple medir la 
 # tx basandonos en las entradas at y linea siguiente
 
