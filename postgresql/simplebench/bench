@@ -7,12 +7,11 @@ PGDB="ongres"
 FULLLOG="bench.log"
 SECS=${1:-300}
 
-
 function test(){
-  for conns in 100 200 300 400 500 600 700 800
+  for conns in 100 300 500 700 900
   do
-    printf "### ${conns} \n" >> $FULLLOG
-    pgbench -n -r --time=${SECS} -c ${conns} ${PGDB} >> $FULLLOG
+    printf "### ${conns} \n" >> ${FULLLOG}_${TEST}
+    pgbench -n -r --time=${SECS} -c ${conns} ${PGDB} >> ${FULLLOG}_${TEST} 
   done
 
   fuckcache
@@ -20,13 +19,14 @@ function test(){
 
 function setdef(){
   cp $SAMPLE $CONF
-  printf "## DEFAULT \n" >> $FULLLOG
+  TEST="DEFAULT"
+  printf "## DEFAULT \n" >> ${FULLLOG}_${TEST}
 }
 
-
 function settuned(){
-  cp $TUNED $CONF  
-  printf "## TUNED \n" >> $FULLLOG
+  cp $TUNED $CONF
+  TEST="TUNED"
+  printf "## TUNED \n" >> ${FULLLOG}_${TEST}
 }
 
 function fuckcache(){
@@ -37,10 +37,11 @@ function vacan(){
   vacuumdb $PGDB
 }
 
+vacan
 setdef
 test
+vacan
 settuned
 test
-
 
 exit 0
