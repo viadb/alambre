@@ -34,7 +34,7 @@ function fuckcache(){
 }
 
 function vacan(){
-  vacuumdb $PGDB
+  vacuumdb -z $PGDB
 }
 
 vacan
