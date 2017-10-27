@@ -1,0 +1,29 @@
+#!/bin/bash
+FILE=$1
+
+header="conn,latency,tps_inc,tps_exc"
+
+printf "${header}"
+
+while read lin
+do
+  if [[ $lin =~ ^## ]]
+  then
+    conns=$(echo ${lin} | cut -d ' ' -f 2)
+    printf "\n${conns},"
+  elif [[ $lin =~ latency ]]
+  then
+    lat=$(echo $lin | cut -d ' ' -f4)
+    printf "$lat,"
+  elif [[ $lin =~ including ]]
+  then
+    inc=$(echo $lin | cut -d ' ' -f3)
+    printf "$inc,"
+  elif [[ $lin =~ excluding ]]
+  then
+    exc=$(echo $lin | cut -d ' ' -f3)
+    printf "$exc"
+  fi
+
+done < <(egrep '###|latency|tps' $FILE)
+printf "\n"
