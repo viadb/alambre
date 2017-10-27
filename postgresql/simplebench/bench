@@ -1,0 +1,46 @@
+#!/bin/bash
+
+TUNED="/etc/postgresql/10/main/postgresql.conf.tuned"
+CONF="/etc/postgresql/10/main/postgresql.conf"
+SAMPLE="/etc/postgresql/10/main/postgresql.conf.sample"
+PGDB="ongres"
+FULLLOG="bench.log"
+SECS=${1:-300}
+
+
+function test(){
+  for conns in 100 200 300 400 500 600 700 800
+  do
+    printf "### ${conns} \n" >> $FULLLOG
+    pgbench -n -r --time=${SECS} -c ${conns} ${PGDB} >> $FULLLOG
+  done
+
+  fuckcache
+}
+
+function setdef(){
+  cp $SAMPLE $CONF
+  printf "## DEFAULT \n" >> $FULLLOG
+}
+
+
+function settuned(){
+  cp $TUNED $CONF  
+  printf "## TUNED \n" >> $FULLLOG
+}
+
+function fuckcache(){
+  sudo bash -c "sync && echo 3 > /proc/sys/vm/drop_caches"
+}
+
+function vacan(){
+  vacuumdb $PGDB
+}
+
+setdef
+test
+settuned
+test
+
+
+exit 0
